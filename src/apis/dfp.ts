@@ -20,9 +20,11 @@ export const dfp = {
     googleTag().cmd.push(() => {
       googleTag().pubads().collapseEmptyDivs();
 
-      ads.forEach(({ slotId, divId, sizeMappings }: AdItem) => {
+      ads.forEach(({ slotId, divId, sizeMappings, targeting }: AdItem) => {
         let responsiveMappings: any = null;
         let mappings: any = sizeMappings;
+        let targets: any = targeting;
+
 
         if (sizeMappings.length > 0) {
           const [firstSizeMapping]: any = sizeMappings;
@@ -49,6 +51,16 @@ export const dfp = {
             });
 
             responsiveMappings = sizeMapping.build();
+          }
+        }
+
+        if (typeof targets !== 'undefined') {
+          const targetKeys = Object.keys(targets);
+          if(targetKeys.length) {
+            targetKeys.map((item, index) => {
+              googleTag().setTargeting(item, targets[item]);
+
+            })
           }
         }
 

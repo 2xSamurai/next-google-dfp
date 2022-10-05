@@ -9,10 +9,21 @@ export type ResponsiveItem = {
 
 export type SizeMappings = FluidItem | SizeItem | SizeItem[] | ResponsiveItem[];
 
+
+export type targetValue = {
+  prop: string[] | string
+}
+
+export type targetingType = {
+  [name: string]: targetValue;
+}
+
+
 export type AdItem = {
   divId: string;
   slotId: string;
   sizeMappings: SizeMappings;
+  targeting: targetingType;
 };
 
 // Context
